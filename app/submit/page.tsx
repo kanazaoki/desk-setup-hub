@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
 import { Usage, Style, ItemCategory } from '@/lib/types'
 
-type FormItem = { name: string; category: ItemCategory; price: string; rakutenUrl: string }
+type FormItem = { name: string; category: ItemCategory; price: string; rakutenUrl: string; amazonUrl: string }
 
 const usageOptions: { value: Usage; label: string }[] = [
   { value: 'gaming', label: 'ゲーミング' },
@@ -72,7 +72,7 @@ export default function SubmitPage() {
   const [hasWebcam, setHasWebcam] = useState(false)
 
   const [items, setItems] = useState<FormItem[]>([
-    { name: '', category: 'desk', price: '', rakutenUrl: '' },
+    { name: '', category: 'desk', price: '', rakutenUrl: '', amazonUrl: '' },
   ])
 
   const [status, setStatus] = useState<'idle' | 'uploading' | 'submitting' | 'done' | 'error'>('idle')
@@ -84,7 +84,7 @@ export default function SubmitPage() {
     setSelectedStyle((prev) => prev.includes(v) ? prev.filter((x) => x !== v) : [...prev, v])
 
   const addItem = () =>
-    setItems((prev) => [...prev, { name: '', category: 'desk', price: '', rakutenUrl: '' }])
+    setItems((prev) => [...prev, { name: '', category: 'desk', price: '', rakutenUrl: '', amazonUrl: '' }])
   const removeItem = (i: number) => setItems((prev) => prev.filter((_, idx) => idx !== i))
   const updateItem = (i: number, field: keyof FormItem, value: string) =>
     setItems((prev) => prev.map((it, idx) => idx === i ? { ...it, [field]: value } : it))
@@ -165,6 +165,7 @@ export default function SubmitPage() {
           category: it.category,
           price: parseInt(it.price) || 0,
           ...(it.rakutenUrl ? { rakutenUrl: it.rakutenUrl } : {}),
+          ...(it.amazonUrl ? { amazonUrl: it.amazonUrl } : {}),
         })),
       status: 'pending',
     }
@@ -398,6 +399,7 @@ export default function SubmitPage() {
                   </div>
                 </div>
                 <input className={inputCls} placeholder="楽天アフィリエイトURL（任意）" value={item.rakutenUrl} onChange={(e) => updateItem(i, 'rakutenUrl', e.target.value)} />
+                <input className={inputCls} placeholder="Amazon URL（任意・アフィリエイトなしでもOK）" value={item.amazonUrl} onChange={(e) => updateItem(i, 'amazonUrl', e.target.value)} />
               </div>
             ))}
           </div>

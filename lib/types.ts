@@ -11,6 +11,7 @@ export interface SetupItem {
   category: ItemCategory
   price: number
   rakutenUrl?: string
+  amazonUrl?: string
 }
 
 export interface Setup {

@@ -126,6 +126,16 @@ export default async function SetupDetail({ params }: { params: Promise<{ id: st
                               楽天
                             </a>
                           )}
+                          {item.amazonUrl && (
+                            <a
+                              href={item.amazonUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs px-2.5 py-1 rounded-md bg-amber-400 hover:bg-amber-500 text-stone-900 transition-colors"
+                            >
+                              Amazon
+                            </a>
+                          )}
                         </div>
                       </div>
                     ))}
