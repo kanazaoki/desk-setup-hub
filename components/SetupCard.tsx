@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Setup } from '@/lib/types'
 
 const usageLabel: Record<string, string> = {
@@ -22,24 +23,30 @@ export default function SetupCard({ setup }: { setup: Setup }) {
   return (
     <Link href={`/setups/${setup.id}`} className="group block">
       <div className="rounded-xl overflow-hidden border border-stone-200 dark:border-stone-800 hover:border-amber-400 dark:hover:border-amber-500 transition-colors bg-white dark:bg-stone-900">
-        {/* Image placeholder */}
-        <div
-          className="h-48 w-full relative"
-          style={{ backgroundColor: setup.imageColor }}
-        >
+        {/* Image */}
+        <div className="relative h-48 w-full overflow-hidden" style={{ backgroundColor: setup.imageColor }}>
+          {setup.imageUrl ? (
+            <Image
+              src={setup.imageUrl}
+              alt={setup.title}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          ) : null}
           <div className="absolute inset-0 flex items-end p-3 gap-1.5 flex-wrap">
             {setup.hasStandingDesk && (
-              <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-black/40 text-white backdrop-blur-sm">
+              <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-black/50 text-white backdrop-blur-sm">
                 昇降デスク
               </span>
             )}
             {setup.hasUltrawide && (
-              <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-black/40 text-white backdrop-blur-sm">
+              <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-black/50 text-white backdrop-blur-sm">
                 ウルトラワイド
               </span>
             )}
             {setup.cableManagement === 'clean' && (
-              <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-black/40 text-white backdrop-blur-sm">
+              <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-black/50 text-white backdrop-blur-sm">
                 配線整理済
               </span>
             )}
@@ -63,18 +70,12 @@ export default function SetupCard({ setup }: { setup: Setup }) {
 
           <div className="mt-2.5 flex flex-wrap gap-1.5">
             {setup.usage.slice(0, 2).map((u) => (
-              <span
-                key={u}
-                className="px-2 py-0.5 rounded-full text-xs bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300"
-              >
+              <span key={u} className="px-2 py-0.5 rounded-full text-xs bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300">
                 {usageLabel[u]}
               </span>
             ))}
             {setup.style.slice(0, 1).map((s) => (
-              <span
-                key={s}
-                className="px-2 py-0.5 rounded-full text-xs bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400"
-              >
+              <span key={s} className="px-2 py-0.5 rounded-full text-xs bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400">
                 {styleLabel[s]}
               </span>
             ))}

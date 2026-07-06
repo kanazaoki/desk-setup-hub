@@ -10,7 +10,7 @@ export interface SetupItem {
   name: string
   category: ItemCategory
   price: number
-  amazonUrl?: string
+  rakutenUrl?: string
 }
 
 export interface Setup {
@@ -18,6 +18,7 @@ export interface Setup {
   title: string
   author: string
   imageColor: string
+  imageUrl?: string
   totalCost: number
   deskWidth: number
   deskDepth: number

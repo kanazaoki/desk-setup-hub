@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import Image from 'next/image'
 import Link from 'next/link'
 import { setups } from '@/lib/data/setups'
 
@@ -25,9 +26,8 @@ export default async function SetupDetail({ params }: { params: Promise<{ id: st
 
   const grouped = setup.items.reduce<Record<string, typeof setup.items>>(
     (acc, item) => {
-      const key = item.category
-      if (!acc[key]) acc[key] = []
-      acc[key].push(item)
+      if (!acc[item.category]) acc[item.category] = []
+      acc[item.category].push(item)
       return acc
     },
     {}
@@ -35,23 +35,29 @@ export default async function SetupDetail({ params }: { params: Promise<{ id: st
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <Link
-        href="/setups"
-        className="text-sm text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
-      >
+      <Link href="/setups" className="text-sm text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
         ← セットアップ一覧に戻る
       </Link>
 
       <div className="mt-4 rounded-xl overflow-hidden border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900">
         {/* Image */}
-        <div className="h-64 sm:h-80 w-full" style={{ backgroundColor: setup.imageColor }} />
+        <div className="relative h-64 sm:h-96 w-full" style={{ backgroundColor: setup.imageColor }}>
+          {setup.imageUrl && (
+            <Image
+              src={setup.imageUrl}
+              alt={setup.title}
+              fill
+              sizes="(max-width: 896px) 100vw, 896px"
+              className="object-cover"
+              priority
+            />
+          )}
+        </div>
 
         <div className="p-6 sm:p-8">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-bold text-stone-900 dark:text-stone-100">
-                {setup.title}
-              </h1>
+              <h1 className="text-2xl font-bold text-stone-900 dark:text-stone-100">{setup.title}</h1>
               <p className="text-stone-500 dark:text-stone-400 mt-1">{setup.author}</p>
             </div>
             <div className="text-right shrink-0">
@@ -62,9 +68,7 @@ export default async function SetupDetail({ params }: { params: Promise<{ id: st
             </div>
           </div>
 
-          <p className="mt-4 text-stone-700 dark:text-stone-300 leading-relaxed">
-            {setup.description}
-          </p>
+          <p className="mt-4 text-stone-700 dark:text-stone-300 leading-relaxed">{setup.description}</p>
 
           {/* Tags */}
           <div className="mt-5 flex flex-wrap gap-2">
@@ -81,7 +85,7 @@ export default async function SetupDetail({ params }: { params: Promise<{ id: st
           </div>
 
           {/* Specs */}
-          <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
               { label: 'デスクサイズ', value: `${setup.deskWidth}×${setup.deskDepth}cm` },
               { label: 'モニター', value: `${setup.monitorCount}枚 / ${setup.monitorSize}インチ` },
@@ -97,9 +101,7 @@ export default async function SetupDetail({ params }: { params: Promise<{ id: st
 
           {/* Items */}
           <div className="mt-8">
-            <h2 className="text-lg font-bold text-stone-900 dark:text-stone-100 mb-4">
-              使用アイテム
-            </h2>
+            <h2 className="text-lg font-bold text-stone-900 dark:text-stone-100 mb-4">使用アイテム</h2>
             <div className="space-y-4">
               {Object.entries(grouped).map(([cat, items]) => (
                 <div key={cat}>
@@ -108,25 +110,20 @@ export default async function SetupDetail({ params }: { params: Promise<{ id: st
                   </h3>
                   <div className="space-y-2">
                     {items.map((item) => (
-                      <div
-                        key={item.name}
-                        className="flex items-center justify-between py-2.5 px-4 rounded-lg bg-stone-50 dark:bg-stone-800"
-                      >
-                        <span className="text-sm text-stone-800 dark:text-stone-200">
-                          {item.name}
-                        </span>
-                        <div className="flex items-center gap-3 shrink-0 ml-4">
+                      <div key={item.name} className="flex items-center justify-between py-2.5 px-4 rounded-lg bg-stone-50 dark:bg-stone-800">
+                        <span className="text-sm text-stone-800 dark:text-stone-200 mr-4">{item.name}</span>
+                        <div className="flex items-center gap-3 shrink-0">
                           <span className="text-sm font-medium text-stone-700 dark:text-stone-300">
                             ¥{item.price.toLocaleString()}
                           </span>
-                          {item.amazonUrl && (
+                          {item.rakutenUrl && (
                             <a
-                              href={item.amazonUrl}
+                              href={item.rakutenUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-xs px-2.5 py-1 rounded-md bg-amber-500 hover:bg-amber-600 text-white transition-colors"
+                              className="text-xs px-2.5 py-1 rounded-md bg-red-500 hover:bg-red-600 text-white transition-colors"
                             >
-                              Amazon
+                              楽天
                             </a>
                           )}
                         </div>
@@ -137,7 +134,6 @@ export default async function SetupDetail({ params }: { params: Promise<{ id: st
               ))}
             </div>
 
-            {/* Total */}
             <div className="mt-4 flex justify-end items-center gap-3 py-3 border-t border-stone-200 dark:border-stone-700">
               <span className="text-stone-600 dark:text-stone-400 text-sm">合計</span>
               <span className="text-xl font-bold text-amber-600 dark:text-amber-400">

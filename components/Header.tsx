@@ -32,6 +32,12 @@ export default function Header() {
               {label}
             </Link>
           ))}
+          <Link
+            href="/submit"
+            className="ml-2 px-3 py-1.5 rounded-md text-sm whitespace-nowrap bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors"
+          >
+            ＋ 投稿
+          </Link>
         </nav>
       </div>
     </header>
