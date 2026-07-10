@@ -28,6 +28,12 @@ const tools = [
     title: '人間工学チェッカー',
     description: '身長を入力するだけでデスク・椅子・モニターの最適な高さと距離を計算',
   },
+  {
+    href: '/tools/monitor-size',
+    icon: '🖥️',
+    title: 'モニターサイズ比較',
+    description: '2つのモニターを実寸スケールで比較。PPI・画面面積・実寸法を即計算',
+  },
 ]
 
 const features = [
@@ -53,7 +59,7 @@ const usageLinks = [
 
 const stats = [
   { value: `${setups.length}+`, label: 'セットアップ掲載' },
-  { value: '2', label: '無料ツール' },
+  { value: `${tools.length}`, label: '無料ツール' },
   { value: '15', label: '比較項目数' },
   { value: '無料', label: '完全無料' },
 ]

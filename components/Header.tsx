@@ -10,6 +10,7 @@ const nav = [
   { href: '/tools/compatibility', label: '互換性チェック' },
   { href: '/tools/budget', label: '予算シミュレーター' },
   { href: '/tools/ergonomics', label: '人間工学' },
+  { href: '/tools/monitor-size', label: 'モニター比較' },
 ]
 
 export default function Header() {
