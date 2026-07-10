@@ -1,6 +1,6 @@
 'use client'
 
-import { FilterState, Usage, Style, ChairType, RoomType } from '@/lib/types'
+import { FilterState, Usage, Style, ChairType, OsType, PcType } from '@/lib/types'
 
 interface Props {
   filters: FilterState
@@ -15,21 +15,55 @@ const usageOptions: { value: Usage; label: string }[] = [
   { value: 'remote', label: 'リモートワーク' },
   { value: 'video', label: '動画編集' },
   { value: 'streaming', label: '配信' },
+  { value: 'music', label: '音楽制作' },
+  { value: 'study', label: '勉強・学習' },
+  { value: 'trading', label: 'トレーダー' },
+  { value: 'cad', label: '3D・CAD' },
+  { value: 'writing', label: '執筆・ブログ' },
 ]
 
 const styleOptions: { value: Style; label: string }[] = [
   { value: 'minimal', label: 'ミニマル' },
+  { value: 'white', label: '白統一' },
+  { value: 'dark', label: 'ダーク' },
   { value: 'rgb', label: 'RGB' },
-  { value: 'cafe', label: 'カフェ風' },
-  { value: 'monochrome', label: 'モノトーン' },
   { value: 'wood', label: 'ウッド' },
+  { value: 'cafe', label: 'カフェ風' },
+  { value: 'nordic', label: '北欧' },
+  { value: 'industrial', label: 'インダストリアル' },
+  { value: 'monochrome', label: 'モノトーン' },
+  { value: 'vintage', label: 'ヴィンテージ' },
 ]
 
-const budgetOptions = [
-  { value: 50000, label: '5万円以下' },
-  { value: 100000, label: '10万円以下' },
-  { value: 200000, label: '20万円以下' },
-  { value: 999999999, label: '制限なし' },
+const chairOptions: { value: ChairType; label: string }[] = [
+  { value: 'gaming', label: 'ゲーミング' },
+  { value: 'office', label: 'オフィス' },
+  { value: 'other', label: 'その他' },
+]
+
+const osOptions: { value: OsType; label: string }[] = [
+  { value: 'mac', label: 'Mac' },
+  { value: 'windows', label: 'Windows' },
+  { value: 'linux', label: 'Linux' },
+  { value: 'other', label: 'その他' },
+]
+
+const pcTypeOptions: { value: PcType; label: string }[] = [
+  { value: 'desktop', label: 'デスクトップ' },
+  { value: 'laptop', label: 'ノートPC' },
+  { value: 'both', label: '両方' },
+]
+
+const budgetRanges = [
+  { min: 0,      max: 50000,  label: '〜5万' },
+  { min: 50000,  max: 100000, label: '5〜10万' },
+  { min: 100000, max: 150000, label: '10〜15万' },
+  { min: 150000, max: 200000, label: '15〜20万' },
+  { min: 200000, max: 250000, label: '20〜25万' },
+  { min: 250000, max: 300000, label: '25〜30万' },
+  { min: 300000, max: 400000, label: '30〜40万' },
+  { min: 400000, max: 500000, label: '40〜50万' },
+  { min: 500000, max: null,   label: '50万〜' },
 ]
 
 const monitorOptions = [
@@ -55,16 +89,29 @@ export default function FilterBar({ filters, onChange, totalCount }: Props) {
     set({ [key]: filters[key] === value ? null : value } as Partial<FilterState>)
   }
 
+  const toggleBudgetRange = (min: number, max: number | null) => {
+    const active = filters.budgetMin === min && filters.budgetMax === max
+    if (active) {
+      set({ budgetMin: null, budgetMax: null })
+    } else {
+      set({ budgetMin: min, budgetMax: max })
+    }
+  }
+
   const reset = () =>
     onChange({
+      budgetMin: null,
       budgetMax: null,
       deskWidthMin: null,
       usage: null,
       monitorCount: null,
       hasStandingDesk: null,
+      hasUltrawide: null,
+      hasVerticalMonitor: null,
       style: null,
       chairType: null,
-      roomType: null,
+      os: null,
+      pcType: null,
     })
 
   const hasFilters = Object.values(filters).some((v) => v !== null)
@@ -113,19 +160,22 @@ export default function FilterBar({ filters, onChange, totalCount }: Props) {
           予算
         </p>
         <div className="flex flex-wrap gap-1.5">
-          {budgetOptions.map(({ value, label }) => (
-            <button
-              key={value}
-              onClick={() => toggle('budgetMax', value)}
-              className={`px-3 py-1 rounded-full text-xs border transition-colors ${
-                filters.budgetMax === value
-                  ? 'bg-amber-500 border-amber-500 text-white'
-                  : 'border-stone-300 dark:border-stone-700 text-stone-600 dark:text-stone-400 hover:border-amber-400'
-              }`}
-            >
-              {label}
-            </button>
-          ))}
+          {budgetRanges.map(({ min, max, label }) => {
+            const active = filters.budgetMin === min && filters.budgetMax === max
+            return (
+              <button
+                key={label}
+                onClick={() => toggleBudgetRange(min, max)}
+                className={`px-3 py-1 rounded-full text-xs border transition-colors ${
+                  active
+                    ? 'bg-amber-500 border-amber-500 text-white'
+                    : 'border-stone-300 dark:border-stone-700 text-stone-600 dark:text-stone-400 hover:border-amber-400'
+                }`}
+              >
+                {label}
+              </button>
+            )
+          })}
         </div>
       </div>
 
@@ -173,6 +223,72 @@ export default function FilterBar({ filters, onChange, totalCount }: Props) {
         </div>
       </div>
 
+      {/* チェア */}
+      <div>
+        <p className="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-2">
+          チェア
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          {chairOptions.map(({ value, label }) => (
+            <button
+              key={value}
+              onClick={() => toggle('chairType', value)}
+              className={`px-3 py-1 rounded-full text-xs border transition-colors ${
+                filters.chairType === value
+                  ? 'bg-amber-500 border-amber-500 text-white'
+                  : 'border-stone-300 dark:border-stone-700 text-stone-600 dark:text-stone-400 hover:border-amber-400'
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* OS */}
+      <div>
+        <p className="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-2">
+          OS
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          {osOptions.map(({ value, label }) => (
+            <button
+              key={value}
+              onClick={() => toggle('os', value)}
+              className={`px-3 py-1 rounded-full text-xs border transition-colors ${
+                filters.os === value
+                  ? 'bg-amber-500 border-amber-500 text-white'
+                  : 'border-stone-300 dark:border-stone-700 text-stone-600 dark:text-stone-400 hover:border-amber-400'
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* PC種別 */}
+      <div>
+        <p className="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-2">
+          PC種別
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          {pcTypeOptions.map(({ value, label }) => (
+            <button
+              key={value}
+              onClick={() => toggle('pcType', value)}
+              className={`px-3 py-1 rounded-full text-xs border transition-colors ${
+                filters.pcType === value
+                  ? 'bg-amber-500 border-amber-500 text-white'
+                  : 'border-stone-300 dark:border-stone-700 text-stone-600 dark:text-stone-400 hover:border-amber-400'
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* スタイル */}
       <div>
         <p className="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-2">
@@ -195,7 +311,7 @@ export default function FilterBar({ filters, onChange, totalCount }: Props) {
         </div>
       </div>
 
-      {/* 昇降デスク */}
+      {/* その他 */}
       <div>
         <p className="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-2">
           その他
@@ -209,17 +325,27 @@ export default function FilterBar({ filters, onChange, totalCount }: Props) {
                 : 'border-stone-300 dark:border-stone-700 text-stone-600 dark:text-stone-400 hover:border-amber-400'
             }`}
           >
-            昇降デスクのみ
+            昇降デスク
           </button>
           <button
-            onClick={() => set({ roomType: filters.roomType === 'studio' ? null : 'studio' as RoomType })}
+            onClick={() => toggle('hasUltrawide', true)}
             className={`px-3 py-1 rounded-full text-xs border transition-colors ${
-              filters.roomType === 'studio'
+              filters.hasUltrawide === true
                 ? 'bg-amber-500 border-amber-500 text-white'
                 : 'border-stone-300 dark:border-stone-700 text-stone-600 dark:text-stone-400 hover:border-amber-400'
             }`}
           >
-            ワンルーム可
+            ウルトラワイド
+          </button>
+          <button
+            onClick={() => toggle('hasVerticalMonitor', true)}
+            className={`px-3 py-1 rounded-full text-xs border transition-colors ${
+              filters.hasVerticalMonitor === true
+                ? 'bg-amber-500 border-amber-500 text-white'
+                : 'border-stone-300 dark:border-stone-700 text-stone-600 dark:text-stone-400 hover:border-amber-400'
+            }`}
+          >
+            縦置きモニター
           </button>
         </div>
       </div>

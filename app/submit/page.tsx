@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
 import { Usage, Style, ItemCategory } from '@/lib/types'
 
-type FormItem = { name: string; category: ItemCategory; price: string; rakutenUrl: string; amazonUrl: string }
+type FormItem = { name: string; category: ItemCategory; price: string }
 
 const usageOptions: { value: Usage; label: string }[] = [
   { value: 'gaming', label: 'ゲーミング' },
@@ -13,14 +13,24 @@ const usageOptions: { value: Usage; label: string }[] = [
   { value: 'remote', label: 'リモートワーク' },
   { value: 'video', label: '動画編集' },
   { value: 'streaming', label: '配信' },
+  { value: 'music', label: '音楽制作' },
+  { value: 'study', label: '勉強・学習' },
+  { value: 'trading', label: 'トレーダー' },
+  { value: 'cad', label: '3D・CAD' },
+  { value: 'writing', label: '執筆・ブログ' },
 ]
 
 const styleOptions: { value: Style; label: string }[] = [
   { value: 'minimal', label: 'ミニマル' },
+  { value: 'white', label: '白統一' },
+  { value: 'dark', label: 'ダーク' },
   { value: 'rgb', label: 'RGB' },
-  { value: 'cafe', label: 'カフェ風' },
-  { value: 'monochrome', label: 'モノトーン' },
   { value: 'wood', label: 'ウッド' },
+  { value: 'cafe', label: 'カフェ風' },
+  { value: 'nordic', label: '北欧' },
+  { value: 'industrial', label: 'インダストリアル' },
+  { value: 'monochrome', label: 'モノトーン' },
+  { value: 'vintage', label: 'ヴィンテージ' },
 ]
 
 const categoryOptions: { value: ItemCategory; label: string }[] = [
@@ -43,6 +53,7 @@ const h2Cls = 'text-base font-semibold text-stone-900 dark:text-stone-100'
 export default function SubmitPage() {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
+  const [snsUrl, setSnsUrl] = useState('')
   const [description, setDescription] = useState('')
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
@@ -52,8 +63,8 @@ export default function SubmitPage() {
   const [deskDepth, setDeskDepth] = useState('60')
   const [deskColor, setDeskColor] = useState('wood')
   const [hasStandingDesk, setHasStandingDesk] = useState(false)
-  const [roomType, setRoomType] = useState('larger')
-  const [isRental, setIsRental] = useState(false)
+  const [os, setOs] = useState('windows')
+  const [pcType, setPcType] = useState('desktop')
 
   const [monitorCount, setMonitorCount] = useState('1')
   const [monitorSize, setMonitorSize] = useState('27')
@@ -61,18 +72,28 @@ export default function SubmitPage() {
   const [hasUltrawide, setHasUltrawide] = useState(false)
 
   const [chairType, setChairType] = useState('office')
-  const [cableManagement, setCableManagement] = useState('loose')
   const [selectedUsage, setSelectedUsage] = useState<Usage[]>([])
   const [selectedStyle, setSelectedStyle] = useState<Style[]>([])
 
+  const [gadgetNotes, setGadgetNotes] = useState('')
   const [hasMechanicalKeyboard, setHasMechanicalKeyboard] = useState(false)
   const [hasMonitorLight, setHasMonitorLight] = useState(false)
   const [hasStreamDeck, setHasStreamDeck] = useState(false)
   const [hasMic, setHasMic] = useState(false)
   const [hasWebcam, setHasWebcam] = useState(false)
+  const [hasMonitorArm, setHasMonitorArm] = useState(false)
+  const [hasTrackball, setHasTrackball] = useState(false)
+  const [hasDeskMat, setHasDeskMat] = useState(false)
+  const [hasUsbHub, setHasUsbHub] = useState(false)
+  const [hasDockingStation, setHasDockingStation] = useState(false)
+  const [hasLaptopStand, setHasLaptopStand] = useState(false)
+  const [hasHeadphoneStand, setHasHeadphoneStand] = useState(false)
+  const [hasFootrest, setHasFootrest] = useState(false)
+  const [hasNas, setHasNas] = useState(false)
+  const [hasSpeaker, setHasSpeaker] = useState(false)
 
   const [items, setItems] = useState<FormItem[]>([
-    { name: '', category: 'desk', price: '', rakutenUrl: '', amazonUrl: '' },
+    { name: '', category: 'desk', price: '' },
   ])
 
   const [status, setStatus] = useState<'idle' | 'uploading' | 'submitting' | 'done' | 'error'>('idle')
@@ -84,7 +105,7 @@ export default function SubmitPage() {
     setSelectedStyle((prev) => prev.includes(v) ? prev.filter((x) => x !== v) : [...prev, v])
 
   const addItem = () =>
-    setItems((prev) => [...prev, { name: '', category: 'desk', price: '', rakutenUrl: '', amazonUrl: '' }])
+    setItems((prev) => [...prev, { name: '', category: 'desk', price: '' }])
   const removeItem = (i: number) => setItems((prev) => prev.filter((_, idx) => idx !== i))
   const updateItem = (i: number, field: keyof FormItem, value: string) =>
     setItems((prev) => prev.map((it, idx) => idx === i ? { ...it, [field]: value } : it))
@@ -136,6 +157,7 @@ export default function SubmitPage() {
     const payload = {
       title,
       author,
+      sns_url: snsUrl || null,
       description,
       image_url: imageUrl,
       total_cost: totalCost,
@@ -143,14 +165,13 @@ export default function SubmitPage() {
       desk_depth: parseInt(deskDepth) || 60,
       desk_color: deskColor,
       has_standing_desk: hasStandingDesk,
-      room_type: roomType,
-      is_rental: isRental,
+      os,
+      pc_type: pcType,
       monitor_count: parseInt(monitorCount) || 1,
       monitor_size: parseInt(monitorSize) || 27,
       has_vertical_monitor: hasVerticalMonitor,
       has_ultrawide: hasUltrawide,
       chair_type: chairType,
-      cable_management: cableManagement,
       usage: selectedUsage,
       style: selectedStyle,
       has_mechanical_keyboard: hasMechanicalKeyboard,
@@ -158,21 +179,34 @@ export default function SubmitPage() {
       has_stream_deck: hasStreamDeck,
       has_mic: hasMic,
       has_webcam: hasWebcam,
+      has_monitor_arm: hasMonitorArm,
+      has_trackball: hasTrackball,
+      has_desk_mat: hasDeskMat,
+      has_usb_hub: hasUsbHub,
+      has_docking_station: hasDockingStation,
+      has_laptop_stand: hasLaptopStand,
+      has_headphone_stand: hasHeadphoneStand,
+      has_footrest: hasFootrest,
+      has_nas: hasNas,
+      has_speaker: hasSpeaker,
+      gadget_notes: gadgetNotes || null,
       items: items
         .filter((it) => it.name)
         .map((it) => ({
           name: it.name,
           category: it.category,
           price: parseInt(it.price) || 0,
-          ...(it.rakutenUrl ? { rakutenUrl: it.rakutenUrl } : {}),
-          ...(it.amazonUrl ? { amazonUrl: it.amazonUrl } : {}),
         })),
-      status: 'pending',
     }
 
-    const { error } = await supabase.from('setup_submissions').insert(payload)
-    if (error) {
-      setErrorMsg(`送信失敗: ${error.message}`)
+    const res = await fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}))
+      setErrorMsg(`送信失敗: ${body.error ?? res.statusText}`)
       setStatus('error')
       return
     }
@@ -214,6 +248,10 @@ export default function SubmitPage() {
           <div>
             <label className={labelCls}>名前・ハンドル <span className="text-red-500">*</span></label>
             <input className={inputCls} value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="@username" required />
+          </div>
+          <div>
+            <label className={labelCls}>SNS・ブログリンク（任意）</label>
+            <input className={inputCls} type="url" value={snsUrl} onChange={(e) => setSnsUrl(e.target.value)} placeholder="https://twitter.com/username" />
           </div>
           <div>
             <label className={labelCls}>説明</label>
@@ -263,25 +301,34 @@ export default function SubmitPage() {
                 ))}
               </select>
             </div>
-            <div>
-              <label className={labelCls}>部屋タイプ</label>
-              <select className={inputCls} value={roomType} onChange={(e) => setRoomType(e.target.value)}>
-                <option value="studio">ワンルーム・1K</option>
-                <option value="larger">1LDK以上</option>
-                <option value="dedicated">書斎専用</option>
-              </select>
-            </div>
           </div>
           <div className="flex flex-wrap gap-4">
-            {[
-              [hasStandingDesk, setHasStandingDesk, '昇降デスクあり'],
-              [isRental, setIsRental, '賃貸'],
-            ].map(([val, setter, label]) => (
-              <label key={label as string} className="flex items-center gap-2 cursor-pointer text-sm text-stone-700 dark:text-stone-300">
-                <input type="checkbox" checked={val as boolean} onChange={(e) => (setter as (v: boolean) => void)(e.target.checked)} className="accent-amber-500" />
-                {label as string}
-              </label>
-            ))}
+            <label className="flex items-center gap-2 cursor-pointer text-sm text-stone-700 dark:text-stone-300">
+              <input type="checkbox" checked={hasStandingDesk} onChange={(e) => setHasStandingDesk(e.target.checked)} className="accent-amber-500" />
+              昇降デスクあり
+            </label>
+          </div>
+          <div>
+            <label className={labelCls}>OS / メインPC</label>
+            <div className="flex flex-wrap gap-2 mt-1">
+              {([['mac', 'Mac'], ['windows', 'Windows'], ['linux', 'Linux'], ['other', 'その他']] as const).map(([v, l]) => (
+                <button key={v} type="button" onClick={() => setOs(v)}
+                  className={`px-3 py-1 rounded-full text-xs border transition-colors ${os === v ? 'bg-amber-500 border-amber-500 text-white' : 'border-stone-300 dark:border-stone-700 text-stone-600 dark:text-stone-400'}`}>
+                  {l}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div>
+            <label className={labelCls}>PC種別</label>
+            <div className="flex flex-wrap gap-2 mt-1">
+              {([['desktop', 'デスクトップ'], ['laptop', 'ノートPC'], ['both', '両方']] as const).map(([v, l]) => (
+                <button key={v} type="button" onClick={() => setPcType(v)}
+                  className={`px-3 py-1 rounded-full text-xs border transition-colors ${pcType === v ? 'bg-amber-500 border-amber-500 text-white' : 'border-stone-300 dark:border-stone-700 text-stone-600 dark:text-stone-400'}`}>
+                  {l}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -338,38 +385,48 @@ export default function SubmitPage() {
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className={labelCls}>チェア種別</label>
-              <select className={inputCls} value={chairType} onChange={(e) => setChairType(e.target.value)}>
-                <option value="gaming">ゲーミング</option>
-                <option value="office">オフィスチェア</option>
-                <option value="other">その他</option>
-              </select>
-            </div>
-            <div>
-              <label className={labelCls}>配線整理</label>
-              <select className={inputCls} value={cableManagement} onChange={(e) => setCableManagement(e.target.value)}>
-                <option value="clean">きれいに整理済み</option>
-                <option value="loose">ゆるい</option>
-              </select>
-            </div>
+          <div>
+            <label className={labelCls}>チェア種別</label>
+            <select className={inputCls} value={chairType} onChange={(e) => setChairType(e.target.value)}>
+              <option value="gaming">ゲーミング</option>
+              <option value="office">オフィスチェア</option>
+              <option value="other">その他</option>
+            </select>
           </div>
           <div>
             <label className={labelCls}>ガジェット</label>
             <div className="flex flex-wrap gap-4">
               {[
                 [hasMechanicalKeyboard, setHasMechanicalKeyboard, 'メカニカルキーボード'],
+                [hasTrackball, setHasTrackball, 'トラックボール'],
+                [hasMonitorArm, setHasMonitorArm, 'モニターアーム'],
                 [hasMonitorLight, setHasMonitorLight, 'モニターライト'],
+                [hasDeskMat, setHasDeskMat, 'デスクマット'],
+                [hasSpeaker, setHasSpeaker, 'スピーカー'],
+                [hasHeadphoneStand, setHasHeadphoneStand, 'ヘッドホンスタンド'],
+                [hasUsbHub, setHasUsbHub, 'USBハブ'],
+                [hasDockingStation, setHasDockingStation, 'ドッキングステーション'],
+                [hasLaptopStand, setHasLaptopStand, 'ノートPCスタンド'],
+                [hasFootrest, setHasFootrest, 'フットレスト'],
                 [hasStreamDeck, setHasStreamDeck, 'Stream Deck'],
                 [hasMic, setHasMic, 'マイク'],
                 [hasWebcam, setHasWebcam, 'Webカメラ'],
+                [hasNas, setHasNas, 'NAS'],
               ].map(([val, setter, label]) => (
                 <label key={label as string} className="flex items-center gap-2 cursor-pointer text-sm text-stone-700 dark:text-stone-300">
                   <input type="checkbox" checked={val as boolean} onChange={(e) => (setter as (v: boolean) => void)(e.target.checked)} className="accent-amber-500" />
                   {label as string}
                 </label>
               ))}
+            </div>
+            <div className="mt-3">
+              <label className={labelCls}>その他のガジェット・こだわりアイテム（自由記述）</label>
+              <textarea
+                className={`${inputCls} resize-none h-20`}
+                value={gadgetNotes}
+                onChange={(e) => setGadgetNotes(e.target.value)}
+                placeholder="KVMスイッチ、チェアマット、アームレスト、ラズパイ、タブレット、ケーブルトレー など"
+              />
             </div>
           </div>
         </div>
@@ -398,8 +455,6 @@ export default function SubmitPage() {
                     <input className={`${inputCls} pl-6`} type="number" placeholder="価格" value={item.price} onChange={(e) => updateItem(i, 'price', e.target.value)} />
                   </div>
                 </div>
-                <input className={inputCls} placeholder="楽天アフィリエイトURL（任意）" value={item.rakutenUrl} onChange={(e) => updateItem(i, 'rakutenUrl', e.target.value)} />
-                <input className={inputCls} placeholder="Amazon URL（任意・アフィリエイトなしでもOK）" value={item.amazonUrl} onChange={(e) => updateItem(i, 'amazonUrl', e.target.value)} />
               </div>
             ))}
           </div>
