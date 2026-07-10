@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Geist } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import Header from '@/components/Header'
 
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen flex flex-col antialiased">
         <Header />
         <main className="flex-1">{children}</main>
+        <Analytics />
         <footer className="border-t border-stone-200 dark:border-stone-800 py-6 mt-12">
           <div className="max-w-6xl mx-auto px-4 text-center text-sm text-stone-500 dark:text-stone-500">
             DeskHub — デスクセットアップ検索・比較サイト
