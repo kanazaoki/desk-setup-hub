@@ -404,7 +404,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
           { minAmount: 0, name: 'IODATA 23.8インチ FHD', note: '配信確認サブ用' },
           { minAmount: 15000, name: 'LG 27QN600-B', note: '27インチ WQHD メイン' },
           { minAmount: 30000, name: 'LG 34WP65C-B', note: '34インチ ウルトラワイド' },
-          { minAmount: 50000, name: '27インチ×2台構成', note: 'ゲーム＋配信管理 分離' },
+          { minAmount: 50000, name: 'LG 27QN600-B × 2台', note: '27インチ WQHD デュアル構成' },
         ],
       },
       {
@@ -551,7 +551,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         { minAmount: 0, name: 'IODATA 27インチ FHD ×2', note: 'デュアルモニター入門' },
         { minAmount: 40000, name: 'LG 27UK850-W ×2', note: '4K USB-C デュアル' },
         { minAmount: 80000, name: 'DELL U2723QE ×3', note: 'トリプル4K体制' },
-        { minAmount: 200000, name: '4K 4画面環境', note: 'Bloomberg風 フル板情報' },
+        { minAmount: 200000, name: 'DELL U2723QE × 4台', note: 'Bloomberg風 4K4画面構成' },
       ]},
       { name: 'チェア', key: 'chair', ratio: 0.22, color: '#3A7BE8', suggestions: [
         { minAmount: 0, name: 'AKRacing WOLF', note: '長時間対応 入門ゲーミング' },
