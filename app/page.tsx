@@ -22,6 +22,12 @@ const tools = [
     title: '予算シミュレーター',
     description: '用途と総予算を入力すると、カテゴリ別の最適な配分と商品候補を提案',
   },
+  {
+    href: '/tools/ergonomics',
+    icon: '📐',
+    title: '人間工学チェッカー',
+    description: '身長を入力するだけでデスク・椅子・モニターの最適な高さと距離を計算',
+  },
 ]
 
 const features = [

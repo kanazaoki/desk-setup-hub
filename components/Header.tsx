@@ -9,6 +9,7 @@ const nav = [
   { href: '/favorites', label: '♥ お気に入り' },
   { href: '/tools/compatibility', label: '互換性チェック' },
   { href: '/tools/budget', label: '予算シミュレーター' },
+  { href: '/tools/ergonomics', label: '人間工学' },
 ]
 
 export default function Header() {
