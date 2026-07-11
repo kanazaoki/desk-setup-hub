@@ -528,9 +528,9 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード' },
       ]},
       { name: 'モニター', key: 'monitor', ratio: 0.22, color: '#E8873A', suggestions: [
-        { minAmount: 0, name: 'BenQ GW2480', note: '24インチ アイケア' },
-        { minAmount: 18000, name: 'BenQ EW2780U', note: '4K 27インチ ブルーライト軽減' },
-        { minAmount: 40000, name: 'DELL U2723QE', note: '4K USB-C 目に優しい' },
+        { minAmount: 0, name: 'BenQ GW2490', note: '24インチ アイケア FHD' },
+        { minAmount: 20000, name: 'LG 27UP850-W', note: '27インチ 4K IPS ブルーライト軽減' },
+        { minAmount: 63000, name: 'DELL U2723QE', note: '4K USB-C 目に優しい' },
       ]},
       { name: 'ライティング', key: 'lighting', ratio: 0.12, color: '#F59E0B', suggestions: [
         { minAmount: 0, name: 'Baseus モニターライト', note: 'グレア防止' },
@@ -556,8 +556,10 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
     categories: [
       { name: 'モニター', key: 'monitor', ratio: 0.38, color: '#E8873A', suggestions: [
         { minAmount: 0, name: 'IODATA 27インチ FHD ×2', note: 'デュアルモニター入門' },
-        { minAmount: 40000, name: 'LG 27UK850-W ×2', note: '4K USB-C デュアル' },
-        { minAmount: 80000, name: 'DELL U2723QE ×3', note: 'トリプル4K体制' },
+        { minAmount: 40000, name: 'LG 27UP850-W', note: '4K USB-C 27インチ 単体' },
+        { minAmount: 80000, name: 'LG 27UP850-W ×2', note: '4K USB-C デュアル構成' },
+        { minAmount: 130000, name: 'DELL U2723QE ×2', note: '4K USB-C デュアル高品位' },
+        { minAmount: 190000, name: 'DELL U2723QE ×3', note: 'トリプル4K体制' },
         { minAmount: 250000, name: 'DELL U2723QE × 4台', note: 'Bloomberg風 4K4画面構成' },
       ]},
       { name: 'チェア', key: 'chair', ratio: 0.22, color: '#3A7BE8', suggestions: [
@@ -599,8 +601,9 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         { minAmount: 570000, name: 'EIZO ColorEdge CG319X', note: '31インチ DCI-P3 98%' },
       ]},
       { name: 'チェア', key: 'chair', ratio: 0.22, color: '#3A7BE8', suggestions: [
-        { minAmount: 0, name: 'オカムラ バロン', note: '長時間フィット' },
+        { minAmount: 0, name: 'ニトリ デスクチェア', note: '入門' },
         { minAmount: 70000, name: 'オカムラ シルフィー', note: '背面メッシュ 高耐久' },
+        { minAmount: 150000, name: 'オカムラ バロン', note: '長時間フィット 高級ライン' },
         { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード' },
       ]},
       { name: 'デスク', key: 'desk', ratio: 0.18, color: '#E83A7B', suggestions: [
