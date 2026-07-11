@@ -193,6 +193,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
           { minAmount: 0, name: 'BenQ GW2490', note: '24インチ sRGB 99%' },
           { minAmount: 20000, name: 'LG 27UP850-W', note: '27インチ 4K DCI-P3 95%' },
           { minAmount: 45000, name: 'ASUS ProArt PA278QV', note: '27インチ WQHD AdobeRGB 99%' },
+          { minAmount: 90000, name: 'ASUS ProArt PA279CRV', note: '27インチ 4K AdobeRGB 99% USB-C' },
           { minAmount: 170000, name: 'EIZO ColorEdge CS2740', note: '27インチ 4K ハードウェアキャリブレーション' },
         ],
       },
@@ -335,6 +336,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
           { minAmount: 0, name: 'BenQ GW2490', note: '24インチ sRGB 99%' },
           { minAmount: 20000, name: 'LG 27UP850-W', note: '27インチ 4K DCI-P3 95%' },
           { minAmount: 45000, name: 'ASUS ProArt PA278QV', note: '27インチ WQHD AdobeRGB 99%' },
+          { minAmount: 90000, name: 'ASUS ProArt PA279CRV', note: '27インチ 4K AdobeRGB 99% USB-C' },
           { minAmount: 170000, name: 'EIZO ColorEdge CS2740', note: '27インチ 4K キャリブレーション' },
         ],
       },
@@ -404,8 +406,8 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         suggestions: [
           { minAmount: 0, name: 'IODATA 23.8インチ FHD', note: '配信確認サブ用' },
           { minAmount: 15000, name: 'LG 27QN600-B', note: '27インチ WQHD メイン' },
-          { minAmount: 55000, name: 'LG 34WP65C-B', note: '34インチ ウルトラワイド' },
           { minAmount: 50000, name: 'LG 27QN600-B × 2台', note: '27インチ WQHD デュアル構成' },
+          { minAmount: 55000, name: 'LG 34WP65C-B', note: '34インチ ウルトラワイド' },
         ],
       },
       {
@@ -478,6 +480,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         { minAmount: 15000, name: 'Focusrite Scarlett 2i2', note: '2in2out スタジオ定番' },
         { minAmount: 30000, name: 'YAMAHA HS5', note: 'モニタースピーカー ペア' },
         { minAmount: 40000, name: 'Focusrite Scarlett 4i4 Gen4', note: '4in4out プロ入門' },
+        { minAmount: 65000, name: 'YAMAHA HS7', note: 'モニタースピーカー ペア 中型' },
         { minAmount: 200000, name: 'Universal Audio Apollo Twin X', note: 'UADプラグイン対応' },
       ]},
       { name: 'チェア', key: 'chair', ratio: 0.20, color: '#3A7BE8', suggestions: [
@@ -591,6 +594,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
     categories: [
       { name: 'モニター', key: 'monitor', ratio: 0.30, color: '#E8873A', suggestions: [
         { minAmount: 0, name: 'BenQ PD2700U', note: '4K 27インチ sRGB100%' },
+        { minAmount: 85000, name: 'ASUS ProArt PA279CRV', note: '27インチ 4K AdobeRGB 99% USB-C' },
         { minAmount: 170000, name: 'EIZO ColorEdge CS2740', note: '4K 自己校正 AdobeRGB' },
         { minAmount: 570000, name: 'EIZO ColorEdge CG319X', note: '31インチ DCI-P3 98%' },
       ]},
@@ -607,6 +611,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
       { name: 'ペンタブレット', key: 'peripheral', ratio: 0.18, color: '#3AE88D', suggestions: [
         { minAmount: 0, name: 'Wacom Intuos S', note: 'ペンタブ 入門' },
         { minAmount: 15000, name: 'Wacom Intuos Pro M', note: 'プロ向け 傾き検知' },
+        { minAmount: 50000, name: 'Wacom One 13 touch', note: '液晶ペンタブ 13.3インチ 入門' },
         { minAmount: 75000, name: 'Wacom Cintiq 16', note: '液晶ペンタブレット 16インチ' },
         { minAmount: 105000, name: 'Wacom Cintiq 22', note: '21.5インチ 液晶ペンタブ FHD' },
         { minAmount: 460000, name: 'Wacom Cintiq Pro 27', note: '4K 液晶ペンタブ フラッグシップ' },
@@ -636,6 +641,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
       { name: 'チェア', key: 'chair', ratio: 0.28, color: '#3A7BE8', suggestions: [
         { minAmount: 0, name: 'ニトリ デスクチェア', note: '入門' },
         { minAmount: 20000, name: 'イトーキ エフチェア', note: '腰サポート 長時間向け' },
+        { minAmount: 35000, name: 'イトーキ サリダ YL8', note: 'メッシュ ランバーサポート' },
         { minAmount: 80000, name: 'オカムラ シルフィー', note: 'ランバーサポート メッシュ' },
         { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード' },
       ]},
