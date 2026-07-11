@@ -38,7 +38,7 @@ const tools = [
 
 const features = [
   { icon: '🔍', title: '絞り込み検索', desc: '用途・予算・チェア・ウルトラワイドなど多彩なフィルターで理想の環境を発見' },
-  { icon: '⚖️', title: 'セットアップ比較', desc: '気になる2件を選んで15項目を並べて比較。差異をひと目で確認できる' },
+  { icon: '⚖️', title: 'セットアップ比較', desc: '気になる2〜3件を選んで17項目を並べて比較。差異をひと目で確認できる' },
   { icon: '♥', title: 'お気に入り保存', desc: '気に入ったセットアップをハートボタンでブックマーク。後でゆっくり見返せる' },
   { icon: '🛒', title: '楽天・Amazon連携', desc: '各アイテムの楽天・Amazonリンクで、気になった商品をすぐ購入できる' },
 ]
@@ -53,14 +53,14 @@ const usageLinks = [
   { value: 'music', label: '音楽制作', emoji: '🎵' },
   { value: 'study', label: '勉強・学習', emoji: '📚' },
   { value: 'trading', label: 'トレーダー', emoji: '📈' },
-  { value: 'cad', label: '3D・CAD', emoji: '🖇️' },
+  { value: 'cad', label: '3D・CAD', emoji: '📐' },
   { value: 'writing', label: '執筆・ブログ', emoji: '✍️' },
 ]
 
 const stats = [
   { value: `${setups.length}+`, label: 'セットアップ掲載' },
   { value: `${tools.length}`, label: '無料ツール' },
-  { value: '15', label: '比較項目数' },
+  { value: '17', label: '比較項目数' },
   { value: '無料', label: '完全無料' },
 ]
 

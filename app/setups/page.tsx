@@ -300,6 +300,7 @@ function SetupsContent() {
                     setup={setup}
                     compareSelected={compareIds.includes(setup.id)}
                     onCompareToggle={toggleCompare}
+                    compareMaxReached={compareIds.length >= 3}
                   />
                 ))}
               </div>

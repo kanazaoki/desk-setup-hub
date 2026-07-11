@@ -111,9 +111,21 @@ export async function generateStaticParams() {
   return setups.map((s) => ({ id: s.id }))
 }
 
-function getRelated(setup: Setup, count = 3): Setup[] {
-  return setups
-    .filter((s) => s.id !== setup.id)
+async function getRelated(setup: Setup, count = 3): Promise<Setup[]> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  let dbSetups: Setup[] = []
+  if (url && key) {
+    const supabase = createClient(url, key)
+    const { data } = await supabase
+      .from('setup_submissions')
+      .select('*')
+      .eq('status', 'approved')
+    if (data) dbSetups = data.map(dbToSetup)
+  }
+
+  const pool = [...setups, ...dbSetups].filter((s) => s.id !== setup.id)
+  return pool
     .map((s) => {
       const sharedUsage = s.usage.filter((u) => setup.usage.includes(u)).length
       const budgetDiff = Math.abs(s.totalCost - setup.totalCost) / (setup.totalCost || 1)
@@ -130,7 +142,7 @@ export default async function SetupDetail({ params }: { params: Promise<{ id: st
   const setup = await getSetup(id)
   if (!setup) notFound()
 
-  const related = getRelated(setup)
+  const related = await getRelated(setup)
   const pageUrl = `https://desk-setup-hub.vercel.app/setups/${id}`
 
   const grouped = setup.items.reduce<Record<string, typeof setup.items>>(

@@ -26,9 +26,10 @@ interface Props {
   setup: Setup
   compareSelected?: boolean
   onCompareToggle?: (id: string) => void
+  compareMaxReached?: boolean
 }
 
-export default function SetupCard({ setup, compareSelected, onCompareToggle }: Props) {
+export default function SetupCard({ setup, compareSelected, onCompareToggle, compareMaxReached }: Props) {
   const [isFav, setIsFav] = useState(false)
 
   useEffect(() => {
@@ -64,15 +65,17 @@ export default function SetupCard({ setup, compareSelected, onCompareToggle }: P
       {/* Compare button */}
       {onCompareToggle && (
         <button
-          onClick={(e) => { e.preventDefault(); onCompareToggle(setup.id) }}
+          onClick={(e) => { e.preventDefault(); if (!compareMaxReached || compareSelected) onCompareToggle(setup.id) }}
           className={`absolute top-2 right-2 z-10 w-7 h-7 rounded-full border-2 flex items-center justify-center text-xs font-bold transition-colors ${
             compareSelected
               ? 'bg-amber-500 border-amber-500 text-white'
+              : compareMaxReached
+              ? 'bg-stone-100/80 dark:bg-stone-800/80 border-stone-200 dark:border-stone-700 text-stone-300 dark:text-stone-600 cursor-not-allowed'
               : 'bg-white/80 dark:bg-stone-900/80 border-stone-300 dark:border-stone-600 text-stone-500 hover:border-amber-400'
           }`}
-          title={compareSelected ? '比較から外す' : '比較に追加'}
+          title={compareSelected ? '比較から外す' : compareMaxReached ? '3件まで選択できます' : '比較に追加'}
         >
-          {compareSelected ? '✓' : '＋'}
+          {compareSelected ? '✓' : compareMaxReached ? '−' : '＋'}
         </button>
       )}
 
