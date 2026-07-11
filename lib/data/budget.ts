@@ -47,6 +47,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
           { minAmount: 0, name: 'ニトリ デスクチェア', note: 'メッシュ 回転昇降' },
           { minAmount: 40000, name: 'AKRacing WOLF', note: 'ゲーミングチェア 入門' },
           { minAmount: 65000, name: 'Secretlab TITAN Evo', note: '高耐久 ランバーサポート' },
+          { minAmount: 90000, name: 'オカムラ シルフィー', note: 'メッシュ 長時間向け' },
           { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード Bサイズ' },
         ],
       },
@@ -73,8 +74,8 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         suggestions: [
           { minAmount: 0, name: 'Logicool G304', note: 'ワイヤレス 軽量' },
           { minAmount: 5000, name: 'Logicool G703h', note: 'HERO 25K センサー' },
-          { minAmount: 25000, name: 'Logicool G PRO X SUPERLIGHT 2', note: '60g 超軽量' },
           { minAmount: 18000, name: 'Razer DeathAdder V3 Pro', note: 'エルゴノミクス ワイヤレス' },
+          { minAmount: 25000, name: 'Logicool G PRO X SUPERLIGHT 2', note: '60g 超軽量' },
         ],
       },
       {
@@ -422,6 +423,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
           { minAmount: 0, name: 'ニトリ デスクチェア', note: 'メッシュ 回転昇降' },
           { minAmount: 40000, name: 'AKRacing WOLF', note: 'ゲーミング 長時間対応' },
           { minAmount: 65000, name: 'Secretlab TITAN Evo', note: '高耐久 ランバーサポート' },
+          { minAmount: 90000, name: 'オカムラ シルフィー', note: 'メッシュ 長時間向け' },
           { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード' },
         ],
       },
@@ -475,11 +477,13 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         { minAmount: 0, name: 'Focusrite Scarlett Solo', note: 'USB-C オーディオIF 入門' },
         { minAmount: 15000, name: 'Focusrite Scarlett 2i2', note: '2in2out スタジオ定番' },
         { minAmount: 30000, name: 'YAMAHA HS5', note: 'モニタースピーカー ペア' },
+        { minAmount: 40000, name: 'Focusrite Scarlett 4i4 Gen4', note: '4in4out プロ入門' },
         { minAmount: 200000, name: 'Universal Audio Apollo Twin X', note: 'UADプラグイン対応' },
       ]},
       { name: 'チェア', key: 'chair', ratio: 0.20, color: '#3A7BE8', suggestions: [
         { minAmount: 0, name: 'ニトリ デスクチェア', note: 'メッシュ 入門' },
-        { minAmount: 20000, name: 'オカムラ シルフィー', note: '長時間座り作業向け' },
+        { minAmount: 35000, name: 'イトーキ サリダ YL8', note: 'ランバーサポート' },
+        { minAmount: 70000, name: 'オカムラ シルフィー', note: '長時間座り作業向け' },
         { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード Bサイズ' },
       ]},
       { name: 'デスク', key: 'desk', ratio: 0.18, color: '#E83A7B', suggestions: [
