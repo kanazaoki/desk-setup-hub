@@ -187,7 +187,9 @@ export default async function SetupDetail({ params }: { params: Promise<{ id: st
           ) : (
             <div className="flex flex-col items-center gap-3 select-none opacity-25">
               <span className="text-8xl">
-                {setup.usage[0] === 'gaming' ? '🎮' : setup.usage[0] === 'programming' ? '💻' : setup.usage[0] === 'design' ? '🎨' : setup.usage[0] === 'video' ? '🎬' : setup.usage[0] === 'streaming' ? '📡' : '🏠'}
+                {
+                  ({ gaming: '🎮', programming: '💻', design: '🎨', video: '🎬', streaming: '📡', music: '🎵', study: '📚', trading: '📈', cad: '📐', writing: '✍️', remote: '🏠' } as Record<string, string>)[setup.usage[0]] ?? '🏠'
+                }
               </span>
               <span className="text-sm font-medium tracking-widest">
                 {setup.deskWidth} × {setup.deskDepth} cm

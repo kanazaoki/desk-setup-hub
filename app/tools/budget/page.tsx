@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, Suspense } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { usageProfiles } from '@/lib/data/budget'
 import { Usage } from '@/lib/types'
 
@@ -8,7 +9,7 @@ const AFL_BASE = 'https://hb.afl.rakuten.co.jp/ichiba/558f8241.079fc0d8.558f8242
 const rakutenUrl = (name: string) =>
   `${AFL_BASE}?pc=${encodeURIComponent('https://search.rakuten.co.jp/search/mall/' + encodeURIComponent(name) + '/')}`
 const amazonUrl = (name: string) =>
-  `https://www.amazon.co.jp/s?k=${encodeURIComponent(name)}`
+  `https://www.amazon.co.jp/s?k=${encodeURIComponent(name)}&i=computers`
 
 const usageOptions: { value: Usage; label: string; emoji: string }[] = [
   { value: 'gaming', label: 'ゲーミング', emoji: '🎮' },
@@ -26,11 +27,33 @@ const usageOptions: { value: Usage; label: string; emoji: string }[] = [
 
 const budgetPresets = [20000, 30000, 50000, 100000, 150000, 300000, 500000]
 
-export default function BudgetPage() {
-  const [usage, setUsage] = useState<Usage | null>(null)
-  const [budget, setBudget] = useState<number>(100000)
-  const [inputValue, setInputValue] = useState('100000')
+function BudgetContent() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const [usage, setUsage] = useState<Usage | null>(() => {
+    const u = searchParams.get('usage') as Usage | null
+    return u && u in usageProfiles ? u : null
+  })
+  const [budget, setBudget] = useState<number>(() => {
+    const b = searchParams.get('budget')
+    const n = b ? parseInt(b, 10) : NaN
+    return isNaN(n) || n < 0 ? 100000 : n
+  })
+  const [inputValue, setInputValue] = useState(() => {
+    const b = searchParams.get('budget')
+    const n = b ? parseInt(b, 10) : NaN
+    return isNaN(n) || n < 0 ? '100000' : b!
+  })
   const [excludedKeys, setExcludedKeys] = useState<Set<string>>(new Set())
+
+  useEffect(() => {
+    const sp = new URLSearchParams()
+    if (usage) sp.set('usage', usage)
+    if (budget !== 100000) sp.set('budget', String(budget))
+    const search = sp.toString()
+    router.replace(search ? `/tools/budget?${search}` : '/tools/budget', { scroll: false })
+  }, [usage, budget, router])
 
   const profile = usage ? usageProfiles[usage] : null
 
@@ -80,19 +103,19 @@ export default function BudgetPage() {
         <h2 className="font-semibold text-stone-900 dark:text-stone-100 mb-3">
           1. 主な用途を選ぶ
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
           {usageOptions.map(({ value, label, emoji }) => (
             <button
               key={value}
               onClick={() => handleUsageChange(value)}
-              className={`flex items-center gap-2.5 px-4 py-3 rounded-xl border text-sm font-medium transition-colors ${
+              className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-sm font-medium transition-colors ${
                 usage === value
                   ? 'bg-amber-500 border-amber-500 text-white'
                   : 'border-stone-300 dark:border-stone-700 text-stone-700 dark:text-stone-300 hover:border-amber-400 bg-white dark:bg-stone-900'
               }`}
             >
-              <span className="text-lg">{emoji}</span>
-              {label}
+              <span className="text-base">{emoji}</span>
+              <span className="truncate">{label}</span>
             </button>
           ))}
         </div>
@@ -299,5 +322,22 @@ export default function BudgetPage() {
         </div>
       )}
     </div>
+  )
+}
+
+export default function BudgetPage() {
+  return (
+    <Suspense fallback={
+      <div className="max-w-3xl mx-auto px-4 py-8">
+        <div className="h-8 w-48 bg-stone-200 dark:bg-stone-800 rounded animate-pulse mb-6" />
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
+          {[...Array(11)].map((_, i) => (
+            <div key={i} className="h-10 rounded-xl bg-stone-100 dark:bg-stone-800 animate-pulse" />
+          ))}
+        </div>
+      </div>
+    }>
+      <BudgetContent />
+    </Suspense>
   )
 }

@@ -178,14 +178,16 @@ function SetupsContent() {
   const toggleCompare = useCallback((id: string) => {
     setCompareIds((prev) => {
       if (prev.includes(id)) return prev.filter((x) => x !== id)
-      if (prev.length >= 2) return prev
+      if (prev.length >= 3) return prev
       return [...prev, id]
     })
   }, [])
 
   const handleCompare = () => {
-    if (compareIds.length === 2) {
-      router.push(`/compare?a=${compareIds[0]}&b=${compareIds[1]}`)
+    if (compareIds.length >= 2) {
+      const params = new URLSearchParams({ a: compareIds[0], b: compareIds[1] })
+      if (compareIds[2]) params.set('c', compareIds[2])
+      router.push(`/compare?${params.toString()}`)
     }
   }
 
@@ -288,7 +290,7 @@ function SetupsContent() {
             <>
               {compareIds.length === 0 && (
                 <p className="text-xs text-stone-400 dark:text-stone-500 mb-3">
-                  カードの ＋ ボタンで2件選ぶと比較できます
+                  カードの ＋ ボタンで2〜3件選ぶと比較できます
                 </p>
               )}
               <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
@@ -311,10 +313,10 @@ function SetupsContent() {
         <div className="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-stone-900 border-t border-stone-200 dark:border-stone-700 shadow-lg">
           <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-4">
             <span className="text-sm text-stone-600 dark:text-stone-400">
-              比較中: <span className="font-medium text-stone-900 dark:text-stone-100">{compareIds.length} / 2件</span>
+              比較中: <span className="font-medium text-stone-900 dark:text-stone-100">{compareIds.length} / 3件</span>
             </span>
             {compareIds.length === 1 && (
-              <span className="text-xs text-stone-400 dark:text-stone-500">あと1件選択してください</span>
+              <span className="text-xs text-stone-400 dark:text-stone-500">あと1〜2件選択してください</span>
             )}
             <div className="ml-auto flex items-center gap-2">
               <button onClick={() => setCompareIds([])}

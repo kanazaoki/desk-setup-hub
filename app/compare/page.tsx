@@ -58,42 +58,56 @@ async function getSetup(id: string): Promise<Setup | null> {
   return data ? dbToSetup(data) : null
 }
 
-function Cell({ a, b, label, getValue }: {
-  a: Setup; b: Setup; label: string
-  getValue: (s: Setup) => string | number | boolean
+function Cell({ items, label }: {
+  items: { value: string | number | boolean }[]
+  label: string
 }) {
-  const va = getValue(a)
-  const vb = getValue(b)
   const fmt = (v: string | number | boolean) =>
     typeof v === 'boolean' ? (v ? 'あり' : 'なし') : String(v)
-  const diff = va !== vb
+  const allSame = items.every((it) => it.value === items[0].value)
 
   return (
     <tr className="border-b border-stone-100 dark:border-stone-800">
       <td className="py-3 px-4 text-xs text-stone-500 dark:text-stone-400 w-28 shrink-0">{label}</td>
-      <td className={`py-3 px-4 text-sm font-medium text-center ${diff ? 'text-amber-600 dark:text-amber-400' : 'text-stone-800 dark:text-stone-200'}`}>
-        {fmt(va)}
-      </td>
-      <td className={`py-3 px-4 text-sm font-medium text-center ${diff ? 'text-amber-600 dark:text-amber-400' : 'text-stone-800 dark:text-stone-200'}`}>
-        {fmt(vb)}
-      </td>
+      {items.map((it, i) => (
+        <td
+          key={i}
+          className={`py-3 px-4 text-sm font-medium text-center ${
+            !allSame ? 'text-amber-600 dark:text-amber-400' : 'text-stone-800 dark:text-stone-200'
+          }`}
+        >
+          {fmt(it.value)}
+        </td>
+      ))}
     </tr>
   )
+}
+
+function row(label: string, setups: Setup[], getValue: (s: Setup) => string | number | boolean) {
+  return <Cell key={label} label={label} items={setups.map((s) => ({ value: getValue(s) }))} />
 }
 
 export default async function ComparePage({
   searchParams,
 }: {
-  searchParams: Promise<{ a?: string; b?: string }>
+  searchParams: Promise<{ a?: string; b?: string; c?: string }>
 }) {
-  const { a, b } = await searchParams
+  const { a, b, c } = await searchParams
   if (!a || !b) notFound()
 
-  const [setupA, setupB] = await Promise.all([getSetup(a), getSetup(b)])
-  if (!setupA || !setupB) notFound()
+  const fetched = await Promise.all([
+    getSetup(a),
+    getSetup(b),
+    c ? getSetup(c) : Promise.resolve(null),
+  ])
+
+  if (!fetched[0] || !fetched[1]) notFound()
+  const setupList = fetched.filter(Boolean) as Setup[]
+
+  const shareUrl = `https://desk-setup-hub.vercel.app/compare?a=${a}&b=${b}${c ? `&c=${c}` : ''}`
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="max-w-5xl mx-auto px-4 py-8">
       <div className="mb-6">
         <Link href="/setups" className="text-sm text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
           ← セットアップ一覧に戻る
@@ -102,12 +116,12 @@ export default async function ComparePage({
       </div>
 
       {/* Header cards */}
-      <div className="grid grid-cols-2 gap-4 mb-6">
-        {[setupA, setupB].map((s) => (
+      <div className={`grid gap-4 mb-6 ${setupList.length === 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
+        {setupList.map((s) => (
           <Link key={s.id} href={`/setups/${s.id}`} className="group block rounded-xl overflow-hidden border border-stone-200 dark:border-stone-800 hover:border-amber-400 dark:hover:border-amber-500 transition-colors bg-white dark:bg-stone-900">
-            <div className="relative h-36 w-full" style={{ backgroundColor: s.imageColor }}>
+            <div className="relative h-32 w-full" style={{ backgroundColor: s.imageColor }}>
               {s.imageUrl && (
-                <Image src={s.imageUrl} alt={s.title} fill sizes="(max-width: 768px) 50vw, 400px" className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                <Image src={s.imageUrl} alt={s.title} fill sizes="(max-width: 768px) 33vw, 320px" className="object-cover group-hover:scale-105 transition-transform duration-300" />
               )}
             </div>
             <div className="p-3">
@@ -120,33 +134,34 @@ export default async function ComparePage({
       </div>
 
       {/* Comparison table */}
-      <div className="rounded-xl border border-stone-200 dark:border-stone-800 overflow-hidden bg-white dark:bg-stone-900">
-        <table className="w-full">
+      <div className="rounded-xl border border-stone-200 dark:border-stone-800 overflow-hidden bg-white dark:bg-stone-900 overflow-x-auto">
+        <table className="w-full min-w-[480px]">
           <thead>
             <tr className="border-b border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800">
               <th className="py-2 px-4 text-left text-xs text-stone-400 dark:text-stone-500 font-medium w-28"></th>
-              <th className="py-2 px-4 text-center text-xs text-stone-600 dark:text-stone-400 font-semibold">{setupA.author}</th>
-              <th className="py-2 px-4 text-center text-xs text-stone-600 dark:text-stone-400 font-semibold">{setupB.author}</th>
+              {setupList.map((s) => (
+                <th key={s.id} className="py-2 px-4 text-center text-xs text-stone-600 dark:text-stone-400 font-semibold">{s.author}</th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            <Cell a={setupA} b={setupB} label="総額" getValue={(s) => `¥${s.totalCost.toLocaleString()}`} />
-            <Cell a={setupA} b={setupB} label="デスク幅" getValue={(s) => `${s.deskWidth}cm`} />
-            <Cell a={setupA} b={setupB} label="デスク奥行" getValue={(s) => `${s.deskDepth}cm`} />
-            <Cell a={setupA} b={setupB} label="モニター" getValue={(s) => `${s.monitorCount}枚 / ${s.monitorSize}インチ`} />
-            <Cell a={setupA} b={setupB} label="昇降デスク" getValue={(s) => s.hasStandingDesk} />
-            <Cell a={setupA} b={setupB} label="ウルトラワイド" getValue={(s) => s.hasUltrawide} />
-            <Cell a={setupA} b={setupB} label="縦置きモニター" getValue={(s) => s.hasVerticalMonitor} />
-            <Cell a={setupA} b={setupB} label="チェア" getValue={(s) => chairLabel[s.chairType]} />
-            <Cell a={setupA} b={setupB} label="OS" getValue={(s) => s.os ? osLabel[s.os] : '—'} />
-            <Cell a={setupA} b={setupB} label="PC種別" getValue={(s) => s.pcType ? pcTypeLabel[s.pcType] : '—'} />
-            <Cell a={setupA} b={setupB} label="メカニカルKB" getValue={(s) => s.hasMechanicalKeyboard} />
-            <Cell a={setupA} b={setupB} label="モニターライト" getValue={(s) => s.hasMonitorLight} />
-            <Cell a={setupA} b={setupB} label="マイク" getValue={(s) => s.hasMic} />
-            <Cell a={setupA} b={setupB} label="Webカメラ" getValue={(s) => s.hasWebcam} />
-            <Cell a={setupA} b={setupB} label="用途" getValue={(s) => s.usage.map((u) => usageLabel[u]).join('・')} />
-            <Cell a={setupA} b={setupB} label="スタイル" getValue={(s) => s.style.map((st) => styleLabel[st]).join('・')} />
-            <Cell a={setupA} b={setupB} label="アイテム数" getValue={(s) => `${s.items.length}点`} />
+            {row('総額', setupList, (s) => `¥${s.totalCost.toLocaleString()}`)}
+            {row('デスク幅', setupList, (s) => `${s.deskWidth}cm`)}
+            {row('デスク奥行', setupList, (s) => `${s.deskDepth}cm`)}
+            {row('モニター', setupList, (s) => `${s.monitorCount}枚 / ${s.monitorSize}インチ`)}
+            {row('昇降デスク', setupList, (s) => s.hasStandingDesk)}
+            {row('ウルトラワイド', setupList, (s) => s.hasUltrawide)}
+            {row('縦置きモニター', setupList, (s) => s.hasVerticalMonitor)}
+            {row('チェア', setupList, (s) => chairLabel[s.chairType])}
+            {row('OS', setupList, (s) => s.os ? osLabel[s.os] : '—')}
+            {row('PC種別', setupList, (s) => s.pcType ? pcTypeLabel[s.pcType] : '—')}
+            {row('メカニカルKB', setupList, (s) => s.hasMechanicalKeyboard)}
+            {row('モニターライト', setupList, (s) => s.hasMonitorLight)}
+            {row('マイク', setupList, (s) => s.hasMic)}
+            {row('Webカメラ', setupList, (s) => s.hasWebcam)}
+            {row('用途', setupList, (s) => s.usage.map((u) => usageLabel[u]).join('・'))}
+            {row('スタイル', setupList, (s) => s.style.map((st) => styleLabel[st]).join('・'))}
+            {row('アイテム数', setupList, (s) => `${s.items.length}点`)}
           </tbody>
         </table>
       </div>
@@ -155,7 +170,7 @@ export default async function ComparePage({
         <p className="text-xs text-stone-400 dark:text-stone-500">
           差異のある項目はオレンジ色で表示されます
         </p>
-        <CompareShareButton url={`https://desk-setup-hub.vercel.app/compare?a=${a}&b=${b}`} />
+        <CompareShareButton url={shareUrl} />
       </div>
     </div>
   )
