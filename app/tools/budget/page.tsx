@@ -17,9 +17,14 @@ const usageOptions: { value: Usage; label: string; emoji: string }[] = [
   { value: 'remote', label: 'リモートワーク', emoji: '🏠' },
   { value: 'video', label: '動画編集', emoji: '🎬' },
   { value: 'streaming', label: '配信', emoji: '📡' },
+  { value: 'music', label: '音楽制作', emoji: '🎵' },
+  { value: 'study', label: '勉強・学習', emoji: '📚' },
+  { value: 'trading', label: 'トレーダー', emoji: '📈' },
+  { value: 'cad', label: '3D・CAD', emoji: '📐' },
+  { value: 'writing', label: '執筆・ブログ', emoji: '✍️' },
 ]
 
-const budgetPresets = [30000, 50000, 100000, 150000, 300000, 500000]
+const budgetPresets = [20000, 30000, 50000, 100000, 150000, 300000, 500000]
 
 export default function BudgetPage() {
   const [usage, setUsage] = useState<Usage | null>(null)

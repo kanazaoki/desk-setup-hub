@@ -129,7 +129,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         suggestions: [
           { minAmount: 0, name: 'IODATA LCD-MF241FDB', note: '23.8インチ FHD' },
           { minAmount: 18000, name: 'LG 27QN600-B', note: '27インチ WQHD IPS' },
-          { minAmount: 35000, name: 'LG 27UK850-W', note: '27インチ 4K USB-C' },
+          { minAmount: 35000, name: 'LG 27UP850-W', note: '27インチ 4K USB-C' },
           { minAmount: 70000, name: 'EIZO FlexScan EV2795', note: '27インチ USB-C ハブ搭載' },
         ],
       },
@@ -178,7 +178,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
     ],
     recommendations: [
       { minBudget: 0, label: '〜5万円', description: '中古オフィスチェア＋24インチFHD＋ニトリ机' },
-      { minBudget: 50000, label: '5〜15万円', description: 'コンテッサ中古＋27インチWQHD＋静電容量キーボード' },
+      { minBudget: 50000, label: '5〜15万円', description: 'イトーキ サリダ YL8＋27インチWQHD＋Keychron K2' },
       { minBudget: 150000, label: '15〜30万円', description: 'カナデモノ＋FLEXISPOT E7＋デュアル27インチ4K' },
       { minBudget: 300000, label: '30万円〜', description: 'ハーマンミラー＋32インチ4K×2枚＋HHKB' },
     ],
@@ -252,7 +252,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
       { minBudget: 0, label: '〜5万円', description: '24インチsRGBモニター＋Wacom Intuos S＋ニトリ机' },
       { minBudget: 50000, label: '5〜15万円', description: '27インチAdobe RGB対応＋Intuos Pro M＋コスパチェア' },
       { minBudget: 150000, label: '15〜30万円', description: '32インチDCI-P3 95%＋ハーマンミラー中古＋Intuos Pro L' },
-      { minBudget: 300000, label: '30万円〜', description: 'Studio Display＋アーロンチェア＋Intuos Pro L＋昇降机' },
+      { minBudget: 300000, label: '30万円〜', description: 'EIZO ColorEdge CS2740＋アーロンチェア＋Cintiq 16＋昇降机' },
     ],
   },
   remote: {
@@ -321,7 +321,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
     ],
     recommendations: [
       { minBudget: 0, label: '〜5万円', description: '中古オフィスチェア＋24インチFHD＋USB会議マイク' },
-      { minBudget: 50000, label: '5〜15万円', description: 'コンテッサ中古＋27インチ＋ニトリ机＋Logicool C920' },
+      { minBudget: 50000, label: '5〜15万円', description: 'イトーキ サリダ YL8＋27インチ＋LINNMON机＋Blue Yeti X' },
       { minBudget: 150000, label: '15〜30万円', description: 'エルゴヒューマン＋ウルトラワイド＋昇降机＋Jabra' },
       { minBudget: 300000, label: '30万円〜', description: 'アーロン＋34インチ以上＋FLEXISPOT E7 Pro＋Shure MV7' },
     ],
@@ -507,7 +507,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
     recommendations: [
       { minBudget: 0, label: '〜5万円', description: 'Scarlett Solo＋ATH-M20x＋ニトリデスク' },
       { minBudget: 50000, label: '5〜15万円', description: 'Scarlett 2i2＋YAMAHA HS5＋快適チェア' },
-      { minBudget: 150000, label: '15〜30万円', description: 'Apollo Twin＋HS8＋昇降デスク' },
+      { minBudget: 150000, label: '15〜30万円', description: 'Focusrite Scarlett 4i4 Gen4＋YAMAHA HS7＋昇降デスク' },
       { minBudget: 300000, label: '30万円〜', description: 'プロスタジオ相当の音響環境＋ハーマンミラー' },
     ],
   },
@@ -665,8 +665,8 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
       ]},
     ],
     recommendations: [
-      { minBudget: 0, label: '〜5万円', description: 'HHKB入門＋BenQ 24インチ＋ニトリチェア' },
-      { minBudget: 50000, label: '5〜15万円', description: 'REALFORCE静音＋4Kモニター＋良いチェア' },
+      { minBudget: 0, label: '〜5万円', description: 'Logicool K380＋BenQ 24インチ＋ニトリチェア' },
+      { minBudget: 50000, label: '5〜15万円', description: 'HHKB Professional HYBRID＋4Kモニター＋イトーキ エフチェア' },
       { minBudget: 150000, label: '15〜25万円', description: '昇降デスク＋オカムラ＋HHKBフル環境' },
       { minBudget: 250000, label: '25万円〜', description: 'ハーマンミラー＋ANC完備＋最上位キーボード' },
     ],
