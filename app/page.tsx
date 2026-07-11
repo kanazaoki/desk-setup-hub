@@ -163,14 +163,30 @@ export default function Home() {
 
       {/* Articles */}
       <section>
-        <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold text-stone-900 dark:text-stone-100">ガイド・記事</h2>
           <Link href="/articles" className="text-sm text-amber-600 dark:text-amber-400 hover:underline">
-            すべて見る →
+            全{articles.length}本 →
           </Link>
         </div>
+        <div className="flex flex-wrap gap-2 mb-5">
+          {[
+            { label: 'デスク・設置', slug: 'dual-monitor-desk-width' },
+            { label: 'モニター', slug: 'monitor-size-guide' },
+            { label: '音楽制作', slug: 'dtm-desk-setup-guide' },
+            { label: '勉強・学習', slug: 'study-desk-setup-guide' },
+            { label: 'トレード', slug: 'trading-desk-setup-guide' },
+            { label: 'CAD・3D', slug: 'cad-desk-setup-guide' },
+            { label: '執筆・ブログ', slug: 'writing-desk-setup-guide' },
+          ].map(({ label, slug }) => (
+            <Link key={slug} href={`/articles/${slug}`}
+              className="px-3 py-1 rounded-full text-xs font-medium border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 text-stone-600 dark:text-stone-400 hover:border-amber-400 dark:hover:border-amber-500 hover:text-amber-700 dark:hover:text-amber-400 transition-colors">
+              {label}
+            </Link>
+          ))}
+        </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {articles.slice(0, 3).map((article) => (
+          {articles.slice(0, 6).map((article) => (
             <Link key={article.slug} href={`/articles/${article.slug}`} className="group block p-5 rounded-xl border border-stone-200 dark:border-stone-800 hover:border-amber-400 dark:hover:border-amber-500 bg-white dark:bg-stone-900 transition-colors">
               <div className="flex flex-wrap gap-1 mb-2">
                 {article.tags.slice(0, 2).map((tag) => (
