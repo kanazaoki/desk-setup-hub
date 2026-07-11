@@ -45,9 +45,9 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         name: 'チェア', key: 'chair', ratio: 0.18, color: '#3A7BE8',
         suggestions: [
           { minAmount: 0, name: 'ニトリ デスクチェア', note: 'メッシュ 回転昇降' },
-          { minAmount: 15000, name: 'AKRacing WOLF', note: 'ゲーミングチェア 入門' },
-          { minAmount: 45000, name: 'Secretlab TITAN Evo', note: '高耐久 ランバーサポート' },
-          { minAmount: 100000, name: 'ハーマンミラー アーロン', note: 'リマスタード Bサイズ' },
+          { minAmount: 40000, name: 'AKRacing WOLF', note: 'ゲーミングチェア 入門' },
+          { minAmount: 65000, name: 'Secretlab TITAN Evo', note: '高耐久 ランバーサポート' },
+          { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード Bサイズ' },
         ],
       },
       {
@@ -73,7 +73,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         suggestions: [
           { minAmount: 0, name: 'Logicool G304', note: 'ワイヤレス 軽量' },
           { minAmount: 5000, name: 'Logicool G703h', note: 'HERO 25K センサー' },
-          { minAmount: 10000, name: 'Logicool G PRO X SUPERLIGHT 2', note: '60g 超軽量' },
+          { minAmount: 25000, name: 'Logicool G PRO X SUPERLIGHT 2', note: '60g 超軽量' },
           { minAmount: 18000, name: 'Razer DeathAdder V3 Pro', note: 'エルゴノミクス ワイヤレス' },
         ],
       },
@@ -118,9 +118,9 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         name: 'チェア', key: 'chair', ratio: 0.28, color: '#3A7BE8',
         suggestions: [
           { minAmount: 0, name: 'ニトリ デスクチェア', note: 'メッシュ 回転昇降' },
-          { minAmount: 15000, name: 'イトーキ サリダ YL8', note: 'ランバーサポート付き' },
-          { minAmount: 50000, name: 'オカムラ コンテッサ セコンダ', note: 'メッシュ 多機能' },
-          { minAmount: 100000, name: 'ハーマンミラー アーロン', note: 'リマスタード Bサイズ' },
+          { minAmount: 35000, name: 'イトーキ サリダ YL8', note: 'ランバーサポート付き' },
+          { minAmount: 70000, name: 'オカムラ シルフィー', note: 'メッシュ 長時間向け' },
+          { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード Bサイズ' },
         ],
       },
       {
@@ -129,7 +129,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
           { minAmount: 0, name: 'IODATA LCD-MF241FDB', note: '23.8インチ FHD' },
           { minAmount: 18000, name: 'LG 27QN600-B', note: '27インチ WQHD IPS' },
           { minAmount: 35000, name: 'LG 27UK850-W', note: '27インチ 4K USB-C' },
-          { minAmount: 60000, name: 'EIZO FlexScan EV2795', note: '27インチ USB-C ハブ搭載' },
+          { minAmount: 70000, name: 'EIZO FlexScan EV2795', note: '27インチ USB-C ハブ搭載' },
         ],
       },
       {
@@ -137,7 +137,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         suggestions: [
           { minAmount: 0, name: 'IKEA LINNMON＋ADILS脚', note: 'コスパ' },
           { minAmount: 15000, name: 'カナデモノ 天板＋脚セット', note: 'シンプル固定' },
-          { minAmount: 35000, name: 'FLEXISPOT E7 昇降脚＋天板', note: '電動スタンディング' },
+          { minAmount: 55000, name: 'FLEXISPOT E7 昇降脚＋天板', note: '電動スタンディング' },
           { minAmount: 70000, name: 'FLEXISPOT E7 Pro＋天板', note: '揺れ対策強化版' },
         ],
       },
@@ -147,7 +147,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
           { minAmount: 0, name: 'Logicool K380', note: 'Bluetooth コンパクト' },
           { minAmount: 6000, name: 'Keychron K2 赤軸', note: 'メカニカル ホットスワップ' },
           { minAmount: 12000, name: 'Logicool MX Keys S', note: 'バックライト 静音' },
-          { minAmount: 25000, name: 'HHKB Professional HYBRID', note: '静電容量 無刻印可' },
+          { minAmount: 30000, name: 'HHKB Professional HYBRID', note: '静電容量 無刻印可' },
         ],
       },
       {
@@ -191,17 +191,17 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         suggestions: [
           { minAmount: 0, name: 'BenQ GW2490', note: '24インチ sRGB 99%' },
           { minAmount: 20000, name: 'LG 27UP850-W', note: '27インチ 4K DCI-P3 95%' },
-          { minAmount: 45000, name: 'BenQ SW271C', note: '27インチ Adobe RGB 99% 写真編集向け' },
-          { minAmount: 90000, name: 'EIZO ColorEdge CS2740', note: '27インチ 4K ハードウェアキャリブレーション' },
+          { minAmount: 45000, name: 'ASUS ProArt PA278QV', note: '27インチ WQHD AdobeRGB 99%' },
+          { minAmount: 170000, name: 'EIZO ColorEdge CS2740', note: '27インチ 4K ハードウェアキャリブレーション' },
         ],
       },
       {
         name: 'チェア', key: 'chair', ratio: 0.23, color: '#3A7BE8',
         suggestions: [
           { minAmount: 0, name: 'ニトリ デスクチェア', note: 'メッシュ 回転昇降' },
-          { minAmount: 15000, name: 'イトーキ サリダ YL8', note: 'ランバーサポート付き' },
-          { minAmount: 50000, name: 'オカムラ コーラル', note: 'ランバーサポート 高耐久' },
-          { minAmount: 100000, name: 'ハーマンミラー アーロン', note: 'リマスタード' },
+          { minAmount: 35000, name: 'イトーキ サリダ YL8', note: 'ランバーサポート付き' },
+          { minAmount: 70000, name: 'オカムラ シルフィー', note: 'ランバーサポート 高耐久' },
+          { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード' },
         ],
       },
       {
@@ -209,7 +209,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         suggestions: [
           { minAmount: 0, name: 'IKEA LINNMON＋脚', note: 'ホワイト コスパ' },
           { minAmount: 15000, name: 'カナデモノ 天板＋脚セット', note: 'シンプル固定' },
-          { minAmount: 35000, name: 'FLEXISPOT E7 昇降＋天板', note: '電動スタンディング' },
+          { minAmount: 55000, name: 'FLEXISPOT E7 昇降＋天板', note: '電動スタンディング' },
         ],
       },
       {
@@ -218,7 +218,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
           { minAmount: 0, name: 'Wacom Intuos S', note: 'CTL-4100 入門' },
           { minAmount: 8000, name: 'Wacom Intuos Pro M', note: 'PTH-660 傾き検知' },
           { minAmount: 25000, name: 'Wacom Intuos Pro L', note: 'PTH-860 大判' },
-          { minAmount: 50000, name: 'Wacom Cintiq 16', note: '液晶ペンタブ 直描き' },
+          { minAmount: 75000, name: 'Wacom Cintiq 16', note: '液晶ペンタブ 直描き' },
         ],
       },
       {
@@ -261,9 +261,9 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         name: 'チェア', key: 'chair', ratio: 0.30, color: '#3A7BE8',
         suggestions: [
           { minAmount: 0, name: 'ニトリ デスクチェア', note: 'メッシュ 回転昇降' },
-          { minAmount: 15000, name: 'イトーキ サリダ YL8', note: 'ランバーサポート付き' },
-          { minAmount: 50000, name: 'エルゴヒューマン エンジョイ', note: 'メッシュ ランバーサポート' },
-          { minAmount: 100000, name: 'ハーマンミラー アーロン', note: 'リマスタード Bサイズ' },
+          { minAmount: 35000, name: 'イトーキ サリダ YL8', note: 'ランバーサポート付き' },
+          { minAmount: 70000, name: 'オカムラ シルフィー', note: 'メッシュ ランバーサポート' },
+          { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード Bサイズ' },
         ],
       },
       {
@@ -271,8 +271,8 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         suggestions: [
           { minAmount: 0, name: 'IODATA LCD-MF241FDB', note: '23.8インチ FHD' },
           { minAmount: 15000, name: 'LG 27QN600-B', note: '27インチ WQHD IPS' },
-          { minAmount: 30000, name: 'LG 34WP65C-B', note: '34インチ ウルトラワイド' },
-          { minAmount: 55000, name: 'EIZO FlexScan EV2795', note: 'USB-C ハブ一体型' },
+          { minAmount: 55000, name: 'LG 34WP65C-B', note: '34インチ ウルトラワイド' },
+          { minAmount: 70000, name: 'EIZO FlexScan EV2795', note: 'USB-C ハブ一体型' },
         ],
       },
       {
@@ -280,7 +280,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         suggestions: [
           { minAmount: 0, name: 'IKEA LINNMON＋ADILS脚', note: 'コスパ' },
           { minAmount: 15000, name: 'カナデモノ 天板＋脚セット', note: 'シンプル固定' },
-          { minAmount: 35000, name: 'FLEXISPOT E7 昇降脚＋天板', note: '電動スタンディング' },
+          { minAmount: 55000, name: 'FLEXISPOT E7 昇降脚＋天板', note: '電動スタンディング' },
         ],
       },
       {
@@ -333,17 +333,17 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         suggestions: [
           { minAmount: 0, name: 'BenQ GW2490', note: '24インチ sRGB 99%' },
           { minAmount: 20000, name: 'LG 27UP850-W', note: '27インチ 4K DCI-P3 95%' },
-          { minAmount: 50000, name: 'BenQ SW271C', note: '27インチ Adobe RGB 99%' },
-          { minAmount: 100000, name: 'EIZO ColorEdge CS2740', note: '27インチ 4K キャリブレーション' },
+          { minAmount: 45000, name: 'ASUS ProArt PA278QV', note: '27インチ WQHD AdobeRGB 99%' },
+          { minAmount: 170000, name: 'EIZO ColorEdge CS2740', note: '27インチ 4K キャリブレーション' },
         ],
       },
       {
         name: 'チェア', key: 'chair', ratio: 0.20, color: '#3A7BE8',
         suggestions: [
           { minAmount: 0, name: 'ニトリ デスクチェア', note: 'メッシュ 回転昇降' },
-          { minAmount: 15000, name: 'AKRacing WOLF', note: 'ゲーミング 長時間対応' },
-          { minAmount: 50000, name: 'オカムラ コンテッサ', note: 'メッシュ 高耐久' },
-          { minAmount: 100000, name: 'ハーマンミラー アーロン', note: 'リマスタード' },
+          { minAmount: 40000, name: 'AKRacing WOLF', note: 'ゲーミング 長時間対応' },
+          { minAmount: 70000, name: 'オカムラ シルフィー', note: 'メッシュ 高耐久' },
+          { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード' },
         ],
       },
       {
@@ -351,7 +351,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         suggestions: [
           { minAmount: 0, name: 'IKEA LINNMON＋脚', note: 'コスパ' },
           { minAmount: 15000, name: 'カナデモノ 天板＋脚セット', note: '広め 固定' },
-          { minAmount: 40000, name: 'FLEXISPOT E7 昇降＋天板', note: '電動スタンディング' },
+          { minAmount: 55000, name: 'FLEXISPOT E7 昇降＋天板', note: '電動スタンディング' },
         ],
       },
       {
@@ -403,7 +403,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         suggestions: [
           { minAmount: 0, name: 'IODATA 23.8インチ FHD', note: '配信確認サブ用' },
           { minAmount: 15000, name: 'LG 27QN600-B', note: '27インチ WQHD メイン' },
-          { minAmount: 30000, name: 'LG 34WP65C-B', note: '34インチ ウルトラワイド' },
+          { minAmount: 55000, name: 'LG 34WP65C-B', note: '34インチ ウルトラワイド' },
           { minAmount: 50000, name: 'LG 27QN600-B × 2台', note: '27インチ WQHD デュアル構成' },
         ],
       },
@@ -420,9 +420,9 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         name: 'チェア', key: 'chair', ratio: 0.16, color: '#3A7BE8',
         suggestions: [
           { minAmount: 0, name: 'ニトリ デスクチェア', note: 'メッシュ 回転昇降' },
-          { minAmount: 15000, name: 'AKRacing WOLF', note: 'ゲーミング 長時間対応' },
-          { minAmount: 50000, name: 'Secretlab TITAN Evo', note: '高耐久 ランバーサポート' },
-          { minAmount: 100000, name: 'ハーマンミラー アーロン', note: 'リマスタード' },
+          { minAmount: 40000, name: 'AKRacing WOLF', note: 'ゲーミング 長時間対応' },
+          { minAmount: 65000, name: 'Secretlab TITAN Evo', note: '高耐久 ランバーサポート' },
+          { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード' },
         ],
       },
       {
@@ -439,7 +439,7 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         suggestions: [
           { minAmount: 0, name: 'Bauhutte BHD-1000M', note: 'ゲーミングデスク 100cm' },
           { minAmount: 15000, name: 'カナデモノ 天板＋脚セット', note: 'シンプル固定' },
-          { minAmount: 35000, name: 'FLEXISPOT E7 昇降＋天板', note: '電動スタンディング' },
+          { minAmount: 55000, name: 'FLEXISPOT E7 昇降＋天板', note: '電動スタンディング' },
         ],
       },
       {
@@ -475,12 +475,12 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         { minAmount: 0, name: 'Focusrite Scarlett Solo', note: 'USB-C オーディオIF 入門' },
         { minAmount: 15000, name: 'Focusrite Scarlett 2i2', note: '2in2out スタジオ定番' },
         { minAmount: 30000, name: 'YAMAHA HS5', note: 'モニタースピーカー ペア' },
-        { minAmount: 80000, name: 'Universal Audio Apollo Twin X', note: 'UADプラグイン対応' },
+        { minAmount: 200000, name: 'Universal Audio Apollo Twin X', note: 'UADプラグイン対応' },
       ]},
       { name: 'チェア', key: 'chair', ratio: 0.20, color: '#3A7BE8', suggestions: [
         { minAmount: 0, name: 'ニトリ デスクチェア', note: 'メッシュ 入門' },
         { minAmount: 20000, name: 'オカムラ シルフィー', note: '長時間座り作業向け' },
-        { minAmount: 100000, name: 'ハーマンミラー アーロン', note: 'リマスタード Bサイズ' },
+        { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード Bサイズ' },
       ]},
       { name: 'デスク', key: 'desk', ratio: 0.18, color: '#E83A7B', suggestions: [
         { minAmount: 0, name: 'ニトリ 幅140cmデスク', note: '機材を置ける広さ' },
@@ -516,9 +516,9 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
       ]},
       { name: 'チェア', key: 'chair', ratio: 0.28, color: '#3A7BE8', suggestions: [
         { minAmount: 0, name: 'ニトリ デスクチェア メッシュ', note: '入門' },
-        { minAmount: 15000, name: 'イトーキ サリダ YL8', note: '背もたれメッシュ' },
-        { minAmount: 50000, name: 'オカムラ シルフィー', note: 'ランバーサポート' },
-        { minAmount: 100000, name: 'ハーマンミラー アーロン', note: 'リマスタード' },
+        { minAmount: 35000, name: 'イトーキ サリダ YL8', note: '背もたれメッシュ' },
+        { minAmount: 70000, name: 'オカムラ シルフィー', note: 'ランバーサポート' },
+        { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード' },
       ]},
       { name: 'モニター', key: 'monitor', ratio: 0.22, color: '#E8873A', suggestions: [
         { minAmount: 0, name: 'BenQ GW2480', note: '24インチ アイケア' },
@@ -554,9 +554,10 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
         { minAmount: 250000, name: 'DELL U2723QE × 4台', note: 'Bloomberg風 4K4画面構成' },
       ]},
       { name: 'チェア', key: 'chair', ratio: 0.22, color: '#3A7BE8', suggestions: [
-        { minAmount: 0, name: 'AKRacing WOLF', note: '長時間対応 入門ゲーミング' },
-        { minAmount: 50000, name: 'オカムラ コンテッサ セコンダ', note: 'ビジネス向け高耐久' },
-        { minAmount: 100000, name: 'ハーマンミラー アーロン', note: 'リマスタード 長時間最適' },
+        { minAmount: 0, name: 'ニトリ デスクチェア', note: '入門' },
+        { minAmount: 40000, name: 'AKRacing WOLF', note: '長時間対応 入門ゲーミング' },
+        { minAmount: 70000, name: 'オカムラ シルフィー', note: 'ビジネス向け高耐久' },
+        { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード 長時間最適' },
       ]},
       { name: 'デスク', key: 'desk', ratio: 0.18, color: '#E83A7B', suggestions: [
         { minAmount: 0, name: 'ニトリ 幅160cmデスク', note: 'マルチモニター対応幅' },
@@ -586,13 +587,13 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
     categories: [
       { name: 'モニター', key: 'monitor', ratio: 0.30, color: '#E8873A', suggestions: [
         { minAmount: 0, name: 'BenQ PD2700U', note: '4K 27インチ sRGB100%' },
-        { minAmount: 50000, name: 'EIZO ColorEdge CS2740', note: '4K 自己校正 AdobeRGB' },
-        { minAmount: 120000, name: 'EIZO ColorEdge CG319X', note: '31インチ DCI-P3 98%' },
+        { minAmount: 170000, name: 'EIZO ColorEdge CS2740', note: '4K 自己校正 AdobeRGB' },
+        { minAmount: 570000, name: 'EIZO ColorEdge CG319X', note: '31インチ DCI-P3 98%' },
       ]},
       { name: 'チェア', key: 'chair', ratio: 0.22, color: '#3A7BE8', suggestions: [
         { minAmount: 0, name: 'オカムラ バロン', note: '長時間フィット' },
-        { minAmount: 80000, name: 'オカムラ コンテッサ セコンダ', note: '背面メッシュ 高耐久' },
-        { minAmount: 120000, name: 'ハーマンミラー アーロン', note: 'リマスタード' },
+        { minAmount: 70000, name: 'オカムラ シルフィー', note: '背面メッシュ 高耐久' },
+        { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード' },
       ]},
       { name: 'デスク', key: 'desk', ratio: 0.18, color: '#E83A7B', suggestions: [
         { minAmount: 0, name: 'ニトリ 幅140cmデスク', note: 'A3図面・タブレット対応幅' },
@@ -602,8 +603,9 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
       { name: 'ペンタブレット', key: 'peripheral', ratio: 0.18, color: '#3AE88D', suggestions: [
         { minAmount: 0, name: 'Wacom Intuos S', note: 'ペンタブ 入門' },
         { minAmount: 15000, name: 'Wacom Intuos Pro M', note: 'プロ向け 傾き検知' },
-        { minAmount: 50000, name: 'Wacom Cintiq 16', note: '液晶ペンタブレット 16インチ' },
-        { minAmount: 120000, name: 'Wacom Cintiq Pro 27', note: '4K 液晶ペンタブ フラッグシップ' },
+        { minAmount: 75000, name: 'Wacom Cintiq 16', note: '液晶ペンタブレット 16インチ' },
+        { minAmount: 105000, name: 'Wacom Cintiq 22', note: '21.5インチ 液晶ペンタブ FHD' },
+        { minAmount: 460000, name: 'Wacom Cintiq Pro 27', note: '4K 液晶ペンタブ フラッグシップ' },
       ]},
       { name: 'キーボード・マウス', key: 'keyboard', ratio: 0.12, color: '#22C55E', suggestions: [
         { minAmount: 0, name: 'Logicool MX Keys', note: 'テンキー付き CADショートカット向け' },
@@ -622,16 +624,16 @@ export const usageProfiles: Record<Usage, UsageProfile> = {
     description: 'キーボードの打鍵感と集中できる静かな環境が大切',
     categories: [
       { name: 'キーボード', key: 'keyboard', ratio: 0.30, color: '#3AE88D', suggestions: [
-        { minAmount: 0, name: 'HHKB Professional HYBRID', note: '静電容量 無接点 コンパクト' },
-        { minAmount: 15000, name: 'Keychron Q1', note: 'アルミ ガスケット 静音赤軸' },
-        { minAmount: 25000, name: 'REALFORCE R3 S 静音', note: '45g 無音打鍵' },
+        { minAmount: 0, name: 'Logicool K380', note: 'Bluetooth コンパクト' },
+        { minAmount: 20000, name: 'Keychron Q1', note: 'アルミ ガスケット 静音赤軸' },
+        { minAmount: 30000, name: 'HHKB Professional HYBRID', note: '静電容量 無接点 コンパクト' },
         { minAmount: 40000, name: 'HHKB Studio', note: 'ポインティングデバイス内蔵' },
       ]},
       { name: 'チェア', key: 'chair', ratio: 0.28, color: '#3A7BE8', suggestions: [
         { minAmount: 0, name: 'ニトリ デスクチェア', note: '入門' },
         { minAmount: 20000, name: 'イトーキ エフチェア', note: '腰サポート 長時間向け' },
         { minAmount: 80000, name: 'オカムラ シルフィー', note: 'ランバーサポート メッシュ' },
-        { minAmount: 100000, name: 'ハーマンミラー アーロン', note: 'リマスタード' },
+        { minAmount: 200000, name: 'ハーマンミラー アーロン', note: 'リマスタード' },
       ]},
       { name: 'デスク', key: 'desk', ratio: 0.18, color: '#E83A7B', suggestions: [
         { minAmount: 0, name: 'IKEA LINNMON 120cm', note: 'シンプル' },
